@@ -27,14 +27,8 @@ db=SQLAlchemy(app)
 class faces(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     picture=db.Column(db.String)
-    #age=db.Column(db.Integer)
-    #gender=db.Column(db.String)
-    #race=db.Column(db.String)
     def __init__(self, picture):
         self.picture=picture
-        #self.age=age
-        #self.gender=gender
-        #self.race=race
 class mnists(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     picture=db.Column(db.String)
