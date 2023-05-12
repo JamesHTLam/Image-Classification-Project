@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}MNIST Page{% endblock %}
+{% block content %}
+<body>
+    <div class="container mt-2">
+    <h1>MNIST</h1>
+    <br><br>
+    <hr>
+    <p>Modified National Institute of Standards and Technology database, or more commonly called, <b>MNIST</b>, is another well-known teaching dataset for training image classification models.</p>
+    <p>Comprised of handwritten digits from 0 - 9, it has 60,000 images of 28x28 pixel.</p>
+    <hr>
+    <p>In below section, press the "Draw a New MNIST Image" button to draw some digits, then save the image to your desktop. Then, press the "Add a New MNIST Image to the Database" to upload the picture.</p>
+    <p>You can then press "Predict" button to see the prediction result.</p>
+    <p>Please note that while you can upload some other pictures of digits and make prediction, prediction results will likely be bad as the trained model are trained with pictures with black-colored blackground and white-colored digits.</p> 
+    <hr>
+
+    <div>
+    <table class="table">
+      <thead>
+         <tr>
+            <th>Picture</th>
+            <th>Number</th>
+            <td colspan="2" ></td>
+         </tr>
+      </thead>
+      <tbody>
+         {% for mnist in mnists %}
+            <tr>
+                <td><img src="{{ mnist.picture }}" height="200px" width="200px"></td>
+                <td>{{ mnist.mnist_number }}</td>
+                <td><button type="button" class="btn btn-outline-danger"><a href="{{ url_for('delete_mnist', id=mnist.id)}}">Delete</a></button>
+                <td><button type="button" class="btn btn-outline-success"><a href="{{ url_for('predict_mnist', id=mnist.id)}}">Predict</a></button>
+            </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+   </div>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-outline-primary"> <a href = "{{ url_for('draw_mnist')}}">Draw a New MNIST Image </a></button>
+        <button type="button" class="btn btn-outline-secondary"> <a href = "{{ url_for('add_mnist')}}">Add a New MNIST Image to the Database </a></button>
+    </div>
+{% endblock %}
+
+
+

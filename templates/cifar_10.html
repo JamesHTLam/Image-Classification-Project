@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}CIFAR Page{% endblock %}
+{% block content %}
+<body>
+    <div class="container mt-2">
+    <h1>CIFAR-10</h1>
+    <br><br>
+    <hr>
+    <p>Developed by Canadian Institute for Advanced Research (CIFAR), <b>CIFAR-10 dataset</b> is one of the most known teaching dataset for training image classification models.</p>
+    <p>It has 60,000 images of 32x32 pixel in 10 different classes of common objects. The 10 classes are airplanes, cars, birds, cats, deer, dogs, frogs, horses, ships, and trucks.</p> 
+    <hr>
+    <p>You can upload some photos in the following section, and then see the prediction result by pressing "Predict" button.</p> 
+    <hr>
+    <div>
+    <table class="table">
+      <thead>
+         <tr>
+            <th>Picture</th>
+            <th>CIFAR-10 Label</th>
+            <td colspan="2" ></td>
+         </tr>
+      </thead>
+      <tbody>
+         {% for cifar in cifars %}
+            <tr>
+                <td><img src="{{ cifar.picture }}" height="200px" width="200px"></td>
+                <td>{{ cifar.cifar_category }}</td>
+                <td><button type="button" class="btn btn-outline-danger"> <a href="{{ url_for('delete_cifar', id=cifar.id)}}">Delete</a></button>
+                <td><button type="button" class="btn btn-outline-success"> <a href="{{ url_for('predict_cifar', id=cifar.id)}}">Predict</a></button>
+            </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+   </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-outline-primary"> <a href = "{{ url_for('add_cifar')}}">Add CIFAR-10 Image</a></button>
+    </div>
+{% endblock %}

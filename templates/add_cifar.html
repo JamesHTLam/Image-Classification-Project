@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Add CIFAR-10 Page{% endblock %}
+{% block content %}
+<h1>Please add a picture with the suitable labels</h1>
+<div class="div_center">
+<br><br>
+<form action = "{{ request.path }}" method = "post" enctype="multipart/form-data">
+    <label>Upload Your Image :</label>
+    <input type="file" class="form-control" name="image_cifar_10">
+    <br>
+    <label>CIFAR-10 Label :</label>
+    <select class="form-control" type="text" name="cifar_10_category">
+        <option value="">--Please choose an option--</option>
+        <option value="Airplane">Airplane</option>
+        <option value="Automobile">Automobile</option>
+        <option value="Bird">Bird</option>
+        <option value="Cat">Cat</option>
+        <option value="Deer">Deer</option>
+        <option value="Dog">Dog</option>
+        <option value="Frog">Frog</option>
+        <option value="Horse">Horse</option>
+        <option value="Ship">Ship</option>
+        <option value="Truck">Truck</option>
+     </select>
+     <br>
+     <input type = "submit" value = "Submit">
+</form>
+</div>
+{% endblock %}

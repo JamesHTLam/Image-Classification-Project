@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}Prediction Face Page{% endblock %}
+{% block content %}
+<h1>Result for this image</h1>
+<br>
+<div class="text-center">
+    <img src="{{url_for('static', filename=img)}}" height="400px" width="400px">
+</div>
+<br><nr></nr>
+<span><h2>Prediction:  </h2></span>
+<br><br>
+{% if prediction %}
+<table class="table">
+    <thead>
+        <td></td>
+        <td><b>Age</b></td>
+        <td><b>Gender</b></td>
+        <td><b>Race</b></td>
+    </thead>
+    <tbody>
+    {% for face in prediction%}
+    <tr>
+        <td><b>Prediction for person {{ loop.index }}</b> </td>
+    {% for key, value in face.items() %}
+        <td> {{ value }} </td>
+    {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<aside>(Percentage in bracket indicate how confident the model consider the image belong to the predicted class)</aside>
+{% endif %}
+{% endblock %}

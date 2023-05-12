@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Prediction CIFAR-10 Page{% endblock %}
+{% block content %}
+<h1>Result for this image</h1>
+<br>
+<div class="text-center">
+   <img src="{{url_for('static', filename=img_path)}}" height="400px" width="400px">
+</div>
+<br><nr></nr>
+<h2>Prediction:  </h2>
+<br><br>
+{% if prediction %}
+<table class="table">
+    <thead>
+        <td></td>
+        <td><b>CIFAR-10 Label</b></td>
+    </thead>
+    <tbody>
+    <tr>
+        <td><b>Predict</b></td>
+        <td> {{ prediction }} </td>
+    </tr>
+    <tr>
+        <td><b>Actual</b></td>
+        <td>{{ cifar.cifar_category }}</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<aside>(Percentage in bracket indicate how confident the model consider the image belong to the predicted class)</aside>
+{% endif %}
+{% endblock %}

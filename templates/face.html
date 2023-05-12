@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}Face Page{% endblock %}
+{% block content %}
+<body>
+    <div class="container mt-2">
+    <h1>UTK Faces</h1>
+    <br><br>
+    <hr>
+    <p>The <b>UTKFace dataset</b> comprised of over 20k images of human faces.</p>
+    <p>All images are labelled by age, gender, and ethnicity: </p>
+    <ul>
+      <li>Age: from 0 - 116</li>
+      <li>Gender: Male or Female</li>
+      <li>Ethnicity: White, Black, Asian, Indian, and Others (like Hispanic, Latino, Middle Eastern). </li>
+   </ul>   
+    <hr>
+    <p>You can add some photos with human faces in the below section. Even pictures with multiple people are acceptable, as the model can detect every human faces and make prediction for all of them in a picture.</p>
+    <p>You should get fairly well result for gender, as distinctions between Male and Female are very apparent. However, for age and ethnicity, this is less likely the case. This is because:</p>
+    <ul>
+      <li>Human faces are inherently not very useful in giving accurate age prediction, especially for people in similar age range.</li>
+      <li>The dataset is imbalanced in terms of ethnicity. Since picutres for training are loopsided to White people, prediction are thus more accuracte for White people, less for other ethnicity.</li>
+   </ul>
+    <div>
+    <table class="table">
+      <thead>
+         <tr>
+            <th>Picture</th>
+            <td colspan="2" ></td>
+         </tr>
+      </thead>
+      <tbody>
+         {% for face in faces %}
+            <tr>
+                <td><img src="{{ face.picture }}" height="200px" width="200px"></td>
+                <td><button type="button" class="btn btn-outline-danger"> <a href="{{ url_for('delete_face', id=face.id)}}">Delete</a></button>
+                <td><button type="button" class="btn btn-outline-success"> <a href="{{ url_for('predict_face', id=face.id)}}">Predict</a></button>
+            </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+   </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-outline-primary"> <a href = "{{ url_for('add_face')}}">Add Face</a></button>
+    </div>
+{% endblock %}
+
+
+

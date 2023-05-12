@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Add Face Page{% endblock %}
+{% block content %}
+<h1>Please add a picture with the suitable labels</h1>
+<div class="div_center">
+<br><br>
+<form action = "{{ request.path }}" method = "post" enctype="multipart/form-data">
+    <label>Upload Your Image :</label>
+    <input type="file" class="form-control" name="image_face">
+    <br>
+    <input type = "submit" value = "Submit">
+</form>
+</div>
+{% endblock %}
+

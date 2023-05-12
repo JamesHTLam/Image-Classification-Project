@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block title %}Draw MNIST Page{% endblock %}
+{% block content %}
+<h1>Please add a picture with the suitable label</h1>
+<br><br>
+<div class="div_center">
+<label>Draw Your Image :</label>
+<br>
+<canvas id="paint" name="mnist_img" width="300" height="300" style="border: 5px solid #000000; background-color: #000000;"></canvas>
+<br>
+<input type = "submit" value = "Submit" onclick="send_image()">
+</div>
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var myCanvas = document.getElementById("paint");
+        if (myCanvas) {
+            var isDown = false;
+            var ctx = myCanvas.getContext("2d");
+            var canvasX, canvasY;
+            ctx.lineWidth = 20;
+            
+            $(myCanvas)
+                .mousedown(function (e) {
+                    isDown = true;
+                    ctx.beginPath();
+                    canvasX = e.pageX - myCanvas.offsetLeft;
+                    canvasY = e.pageY - myCanvas.offsetTop;
+                    ctx.moveTo(canvasX, canvasY);
+                })
+                .mousemove(function (e) {
+                    if (isDown != false) {
+                        canvasX = e.pageX - myCanvas.offsetLeft;
+                        canvasY = e.pageY - myCanvas.offsetTop;
+                        ctx.lineTo(canvasX, canvasY);
+                        ctx.strokeStyle = "white";
+                        ctx.stroke();
+                    }
+                })
+                .mouseup(function (e) {
+                    isDown = false;
+                    ctx.closePath();
+                });    
+        }
+    };
+
+    function send_image(){
+        var myCanvas = document.getElementById("paint");
+        var ctx = myCanvas.getContext("2d");
+        newCanvas = document.createElement("canvas");
+        newCanvas.width = myCanvas.width;
+        newCanvas.height = myCanvas.height;
+        newCtx = newCanvas.getContext('2d');
+        newCtx.fillStyle = "#000000";
+        newCtx.fillRect(0,0,myCanvas.width,myCanvas.height);
+        newCtx.drawImage(myCanvas, 0, 0);
+        ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+        var link = document.createElement('a');
+        link.download = 'filename.png';
+        link.href = newCanvas.toDataURL('image/png')
+        link.click();
+    }
+</script>
+{% endblock %}
