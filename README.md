@@ -5,6 +5,12 @@
 - MNIST: for handwritten digits from 0 - 9
 - UTKFace: for facial image in terms of a) Age: from 0 - 116, b) Gender: Male or Female, and c) Ethnicity: White, Black, Asian, Indian, and Others (like Hispanic, Latino, Middle Eastern).
 
+## Tools
+- Programming: Python
+- Web Framework: Flask
+- Database: SQLAlchemy
+- Image Classification: Tensoflow, Keras 
+
 
 ## Images of the web app:
 
